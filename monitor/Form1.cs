@@ -1,14 +1,8 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 
 namespace monitor
 {
@@ -16,12 +10,12 @@ namespace monitor
     {
         static public string Exeptions { get; set; } = null;
         static private string _date;
-        string url; //  http://www.cbr.ru/scripts/XML_daily.asp?date_req=02/03/2002
+        string url;
         private string _key = "9a06c1e545d005b9b5f722434665d5d4";
         private string _base = "RUB";   
         List<string> listValue = new List<string>();
         Random rnd = new Random();
-        private double _sizeZoom = 1; 
+        private double _sizeZoom = 1;
 
         public MainForm()
         {
@@ -39,7 +33,6 @@ namespace monitor
                 var request = new GetRequest(url);
                 request.Run();
                 var json = JObject.Parse(request.Response);
-
                 var value = json["data"]["USDRUB"];*/
                 var value = rnd.Next(70000, 75000) / 1000.0;
                 listValue.Add(value.ToString());
@@ -69,7 +62,6 @@ namespace monitor
                     chartEUR.Series[1].Points.Add(double.Parse(listValue[i])).Color = Color.Red;
                     chartEUR.Series[1].Points[i].LabelForeColor = Color.Red;
                 }
-                chartEUR.Series[1].Points[i].Label = ((double.Parse(listValue[i]) - double.Parse(listValue[i - 1])) / double.Parse(listValue[i - 1]) * 100).ToString("0.00") + "%";
             }
         }
         private void chartEUR_MouseClick(object sender, MouseEventArgs e)
@@ -77,7 +69,16 @@ namespace monitor
             if (e.Button == MouseButtons.Right)
             {
                 chartEUR.ChartAreas[0].AxisX.ScaleView.ZoomReset();
-                _sizeZoom = 1; 
+                _sizeZoom = 1;
+            }
+            else if (e.Button == MouseButtons.Left)
+            {
+                var res = chartEUR.HitTest(e.X, e.Y);
+                if (res.Series != null && res.Series == chartEUR.Series[1] && res.PointIndex!= 0)
+                {
+                    var difference = res.Series.Points[res.PointIndex].YValues[0] - res.Series.Points[res.PointIndex - 1].YValues[0];
+                    res.Series.Points[res.PointIndex].Label = $"{(difference / res.Series.Points[res.PointIndex - 1].YValues[0] * 100).ToString("0.00")}%\r\n{difference.ToString("0.00")} руб.";
+                }
             }
         }
 
