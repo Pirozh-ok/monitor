@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace monitor
 {
@@ -20,6 +21,7 @@ namespace monitor
         private string _base = "RUB";   
         List<string> listValue = new List<string>();
         Random rnd = new Random();
+        private double _sizeZoom = 1; 
 
         public MainForm()
         {
@@ -43,27 +45,49 @@ namespace monitor
                 listValue.Add(value.ToString());
             }
             listValue.Reverse();
-            chartEUR.ChartAreas[0].AxisY.Minimum = double.Parse(listValue.Min()) - 1;
-            chartEUR.ChartAreas[0].AxisY.Maximum = double.Parse(listValue.Max()) + 1;
+
+            /*Очищаем график, отрисовываем первые точки и устанавливаем границы по Y*/
             chartEUR.Series[0].Points.Clear();
             chartEUR.Series[1].Points.Clear();
 
+            chartEUR.ChartAreas[0].AxisY.Minimum = double.Parse(listValue.Min()) - 1;
+            chartEUR.ChartAreas[0].AxisY.Maximum = double.Parse(listValue.Max()) + 1;
+
             chartEUR.Series[0].Points.Add(double.Parse(listValue[0]));
             chartEUR.Series[1].Points.Add(double.Parse(listValue[0])).Color = Color.Green;
-            chartEUR.Series[1].Points[0].MarkerSize = 10;
 
             for (int i = 1; i < listValue.Count; i++)
             {
                 chartEUR.Series[0].Points.Add(double.Parse(listValue[i]));
                 if (listValue[i].CompareTo(listValue[i - 1]) > 0)
+                {
                     chartEUR.Series[1].Points.Add(double.Parse(listValue[i])).Color = Color.Green;
-                else chartEUR.Series[1].Points.Add(double.Parse(listValue[i])).Color = Color.Red;
+                    chartEUR.Series[1].Points[i].LabelForeColor = Color.Green;
+                }
+                else
+                {
+                    chartEUR.Series[1].Points.Add(double.Parse(listValue[i])).Color = Color.Red;
+                    chartEUR.Series[1].Points[i].LabelForeColor = Color.Red;
+                }
+                chartEUR.Series[1].Points[i].Label = ((double.Parse(listValue[i]) - double.Parse(listValue[i - 1])) / double.Parse(listValue[i - 1]) * 100).ToString("0.00") + "%";
+            }
+        }
+        private void chartEUR_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                chartEUR.ChartAreas[0].AxisX.ScaleView.ZoomReset();
+                _sizeZoom = 1; 
             }
         }
 
-        private void chartEUR_Click(object sender, EventArgs e)
+        private void chartEUR_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            chartEUR.ChartAreas[0].InnerPlotPosition.Width = chartEUR.ChartAreas[0].InnerPlotPosition.Width * ((float)1.1);
+            if (e.Button == MouseButtons.Left)
+            {
+                chartEUR.ChartAreas[0].AxisX.ScaleView.Zoom(_sizeZoom, 10);
+                _sizeZoom *= 2;
+            }
         }
     }
 }

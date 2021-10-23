@@ -56,13 +56,14 @@ namespace monitor
             series2.IsVisibleInLegend = false;
             series2.Legend = "Legend1";
             series2.Name = "Series1";
-            series2.YValuesPerPoint = 2;
+            series2.YValuesPerPoint = 4;
             this.chartEUR.Series.Add(series1);
             this.chartEUR.Series.Add(series2);
             this.chartEUR.Size = new System.Drawing.Size(776, 426);
             this.chartEUR.TabIndex = 1;
             this.chartEUR.Text = "chart1";
-            this.chartEUR.Click += new System.EventHandler(this.chartEUR_Click);
+            this.chartEUR.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chartEUR_MouseClick);
+            this.chartEUR.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.chartEUR_MouseDoubleClick);
             // 
             // MainForm
             // 
