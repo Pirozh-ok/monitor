@@ -76,8 +76,17 @@ namespace monitor
                 var res = chartEUR.HitTest(e.X, e.Y);
                 if (res.Series != null && res.Series == chartEUR.Series[1] && res.PointIndex!= 0)
                 {
-                    var difference = res.Series.Points[res.PointIndex].YValues[0] - res.Series.Points[res.PointIndex - 1].YValues[0];
-                    res.Series.Points[res.PointIndex].Label = $"{(difference / res.Series.Points[res.PointIndex - 1].YValues[0] * 100).ToString("0.00")}%\r\n{difference.ToString("0.00")} руб.";
+                    if (res.Series.Points[res.PointIndex].Label == String.Empty)
+                    {
+                        res.Series.Points[res.PointIndex].BorderColor = Color.Black;
+                        var difference = res.Series.Points[res.PointIndex].YValues[0] - res.Series.Points[res.PointIndex - 1].YValues[0];
+                        res.Series.Points[res.PointIndex].Label = $"{(difference / res.Series.Points[res.PointIndex - 1].YValues[0] * 100).ToString("0.00")}%\r\n{difference.ToString("0.00")} руб.";
+                    }
+                    else
+                    {
+                        res.Series.Points[res.PointIndex].Label = String.Empty;
+                        res.Series.Points[res.PointIndex].BorderColor = Color.Empty; 
+                    }
                 }
             }
         }

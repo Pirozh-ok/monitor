@@ -29,36 +29,36 @@ namespace monitor
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chartEUR = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.chartEUR)).BeginInit();
             this.SuspendLayout();
             // 
             // chartEUR
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartEUR.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartEUR.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chartEUR.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chartEUR.Legends.Add(legend2);
             this.chartEUR.Location = new System.Drawing.Point(12, 12);
             this.chartEUR.Name = "chartEUR";
-            series1.BorderWidth = 3;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Color = System.Drawing.Color.Gray;
-            series1.Legend = "Legend1";
-            series1.Name = "курс USD";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series2.IsVisibleInLegend = false;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            series2.YValuesPerPoint = 4;
-            this.chartEUR.Series.Add(series1);
-            this.chartEUR.Series.Add(series2);
+            series3.BorderWidth = 3;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Color = System.Drawing.Color.Gray;
+            series3.Legend = "Legend1";
+            series3.Name = "курс USD";
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series4.IsVisibleInLegend = false;
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            series4.YValuesPerPoint = 4;
+            this.chartEUR.Series.Add(series3);
+            this.chartEUR.Series.Add(series4);
             this.chartEUR.Size = new System.Drawing.Size(776, 426);
             this.chartEUR.TabIndex = 1;
             this.chartEUR.Text = "chart1";
