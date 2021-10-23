@@ -1,7 +1,7 @@
 ﻿
 namespace monitor
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -29,35 +29,57 @@ namespace monitor
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            this.chartEUR = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            ((System.ComponentModel.ISupportInitialize)(this.chartEUR)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // chartEUR
             // 
-            this.button1.Location = new System.Drawing.Point(472, 231);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(106, 60);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            chartArea1.Name = "ChartArea1";
+            this.chartEUR.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartEUR.Legends.Add(legend1);
+            this.chartEUR.Location = new System.Drawing.Point(12, 12);
+            this.chartEUR.Name = "chartEUR";
+            series1.BorderWidth = 3;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Color = System.Drawing.Color.Gray;
+            series1.Legend = "Legend1";
+            series1.Name = "курс USD";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series2.IsVisibleInLegend = false;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            series2.YValuesPerPoint = 2;
+            this.chartEUR.Series.Add(series1);
+            this.chartEUR.Series.Add(series2);
+            this.chartEUR.Size = new System.Drawing.Size(776, 426);
+            this.chartEUR.TabIndex = 1;
+            this.chartEUR.Text = "chart1";
+            this.chartEUR.Click += new System.EventHandler(this.chartEUR_Click);
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Controls.Add(this.chartEUR);
+            this.Name = "MainForm";
+            this.Text = "Parser";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.chartEUR)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartEUR;
     }
 }
 

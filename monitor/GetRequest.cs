@@ -32,7 +32,7 @@ namespace monitor
             }
             catch (Exception e)
             {
-                Form1.Exeptions = e.Message.ToString(); 
+                MainForm.Exeptions = e.Message.ToString(); 
             }
         }
     }
